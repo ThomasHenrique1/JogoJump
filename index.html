@@ -8,13 +8,23 @@
 </head>
 <body>
     <div class="game-board">
-
         <img src="imagens/clouds.png" class="clouds">
-        <img src="imagens/mario.gif" class="mario">
+        <img src="imagens/mario.gif" class="mario" id="mario">
         <img src="imagens/pipe.png" class="pipe">
-
+    
+        <div class="score" id="score">Score: 0</div>
+        <div class="game-over-message" id="gameOverMessage">Game Over</div>
+        
+        <input type="text" id="nicknameInput" class="nickname-input" placeholder="Enter your nickname">
+        <button id="startGameBtn" class="start-game-btn">Start Game</button>
+        
+        <div class="high-scores" id="highScores" style="display: none;">
+            <h3>High Scores:</h3>
+            <ul id="highScoreList"></ul>
+        </div>
     </div>
-
+    
+ 
     <script src="js/script.js"></script>
 </body>
 </html>

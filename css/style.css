@@ -1,76 +1,170 @@
-*{
-    margin:  0;
+:root {
+    --ground-color: rgb(35, 160, 35);
+    --sky-start-color: #87CEEB;
+    --sky-end-color: #E0F6FF;
+    --score-color: #ffffff;
+    --button-bg-color: #ff4747;
+    --button-text-color: #ffffff;
+    --blur-background: rgba(0, 0, 0, 0.5);
+}
+
+* {
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.game-board{
+.game-board {
     width: 100%;
     height: 500px;
-    border-bottom: 15px solid rgb(35, 160, 35);
+    border-bottom: 15px solid var(--ground-color);
     margin: 0 auto;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(#87CEEB, #E0F6FF);
+    background: linear-gradient(var(--sky-start-color), var(--sky-end-color));
 }
 
-.pipe{
+.pipe {
     position: absolute;
     bottom: 0;
     width: 80px;
     animation: pipe-animation 1.5s infinite linear;
 }
-.mario{
+
+.mario {
     width: 150px;
     position: absolute;
     bottom: 0;
+    transition: bottom 0.2s ease;
 }
 
-.jump{
+.jump {
     animation: jump 500ms ease-out;
 }
 
-.clouds{
+.clouds {
     position: absolute;
     width: 550px;
-    animation:  clouds-animation 20s infinite linear;
-
+    animation: clouds-animation 20s infinite linear;
 }
 
-@keyframes pipe-animation{
-    from{
+.score {
+    font-size: 2rem;
+    color: var(--score-color);
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: Arial, sans-serif;
+    z-index: 2;
+}
+
+.game-over-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    font-size: 2rem;
+    color: red;
+    font-family: Arial, sans-serif;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    display: none; /* Inicialmente escondido até o Game Over */
+    z-index: 2;
+}
+
+.nickname-input {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    border: none;
+    background: var(--blur-background);
+    color: white;
+    z-index: 2;
+    display: block; /* Aumenta a visibilidade */
+}
+
+.start-game-btn {
+    position: absolute;
+    top: 60%; /* Ajusta a posição conforme necessário */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: var(--button-text-color);
+    background-color: var(--button-bg-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 2;
+    display: block; /* Aumenta a visibilidade */
+}
+
+.start-game-btn:hover {
+    background-color: darkred;
+}
+
+.high-scores {
+    position: absolute;
+    top: 10px; /* Posição no topo */
+    right: 10px; /* Posição à direita */
+    padding: 10px; /* Padding reduzido para ficar mais discreto */
+    font-size: 1rem; /* Tamanho da fonte reduzido */
+    border-radius: 10px; /* Cantos arredondados */
+    background: rgba(255, 255, 255, 0.8); /* Fundo mais discreto */
+    color: black; /* Texto preto */
+    z-index: 2;
+    display: none; /* Inicialmente oculto */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    border: 1px solid #2ECC71; /* Borda verde sutil */
+}
+
+.high-scores h3 {
+    text-align: left; /* Alinhamento à esquerda */
+    margin-bottom: 5px; /* Espaço reduzido abaixo do título */
+    color: #2ECC71; /* Cor do título */
+    font-family: 'Arial', sans-serif; /* Fonte mais discreta para o título */
+    font-size: 1.1rem; /* Tamanho de fonte do título reduzido */
+}
+
+.high-scores ul {
+    list-style-type: none; /* Remove marcadores de lista */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+.high-scores li {
+    padding: 3px 0; /* Espaço entre os itens da lista reduzido */
+    border-bottom: 1px solid #ccc; /* Linha divisória entre os scores */
+}
+
+.high-scores li:last-child {
+    border-bottom: none; /* Remove a linha do último item */
+}
+
+/* Keyframes de Animação */
+@keyframes pipe-animation {
+    from {
         right: -80px;
     }
-    to{
+    to {
         right: 100%;
     }
 }
 
-@keyframes jump{
-
-    0%{
-        bottom: 0;
-    }
-    40%{
-        bottom: 180px;
-    }
-    50%{
-        bottom: 180px;
-    }
-    60%{
-        bottom: 180px;
-    }
-    100%{
-        bottom: 0;
-    }
-
+@keyframes jump {
+    0% { bottom: 0; }
+    40%, 50%, 60% { bottom: 180px; }
+    100% { bottom: 0; }
 }
 
-@keyframes clouds-animation{
-    from {
-        right: -550px;
-    }
-    to{
-        right: 100%;
-    }
+@keyframes clouds-animation {
+    from { right: -550px; }
+    to { right: 100%; }
 }
+
